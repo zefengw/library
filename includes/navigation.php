@@ -7,14 +7,29 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-          <form method="post" action="">
+          <form method="post" action="./search.php">
             <li>
+
+
               <div class="input-group">
+
+              <select class="form-select form-select-sm" aria-label="Default select example" style="border-style: none;" name="select">
+                  <option value="">Search By:</option>
+                  <option value="user">Username</option>
+                  <option value="person_id">Person ID</option>
+                  <option value="title">Book Title</option>
+                  <option value="author">Book Author</option>
+                </select>
+
                 <div class="nav-item active">
-                  <input type="search" id="form1" class="form-control" placeholder="Search">
+                  <input type="search" id="form1" class="form-control" placeholder="Search" name="search_bar"> <!-- Search Bar-->
                 </div>
-            <button type="button" class="btn btn-primary" name="book_search">Go</button>
+
+                <button type="submit" class="btn btn-primary" name="book_search" href="search.php">Go</button>
               </div>
+
+
+
             </li>
         </form>
 
@@ -29,18 +44,8 @@
                 Options
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Admin</a>
-                <a class="dropdown-item" href="#">Profile</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="login.php">
-                  <?php
-                  if(isset($_POST['login'])){
-                    echo "Login";
-                  }else{
-                    echo "Logout";
-                  }
-                  ?>
-                </a>
+                <a class="dropdown-item" href="includes/logout.php">Logout</a>
               </div>
             </li>
           </ul>
