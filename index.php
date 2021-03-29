@@ -59,19 +59,16 @@
               $the_user_id = $_GET['return'];
               $query = "UPDATE users SET book_status = 'returned' WHERE user_id = {$the_user_id} ";
               $change_return_query = mysqli_query($connection, $query);
-              header("Location: ./index.php");
             }
             if(isset($_GET['borrow'])){
               $the_user_id = $_GET['borrow'];
               $query = "UPDATE users SET book_status = 'borrowed' WHERE user_id = {$the_user_id} ";
               $change_borrow_query = mysqli_query($connection, $query);
-              header("Location: ./index.php");
             }
             if(isset($_GET['delete'])){
               $the_user_id = $_GET['delete'];
               $query = "DELETE FROM users WHERE user_id = {$the_user_id} ";
               $delete_user_query = mysqli_query($connection, $query);
-              header("Location: ./index.php");
             }
           ?>
         </tbody>

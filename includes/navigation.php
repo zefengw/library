@@ -20,9 +20,9 @@
                   <option value="title">Book Title</option>
                   <option value="author">Book Author</option>
                 </select>
-
+                <!-- Search Bar-->
                 <div class="nav-item active">
-                  <input type="search" id="form1" class="form-control" placeholder="Search" name="search_bar"> <!-- Search Bar-->
+                  <input type="search" id="form1" class="form-control" placeholder="Search" name="search_bar">
                 </div>
 
                 <button type="submit" class="btn btn-primary" name="book_search" href="search.php">Go</button>
