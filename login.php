@@ -1,26 +1,49 @@
 <?php
 include "includes/functions.php";
 session_start();
-    if(isset($_POST['login'])){
-        $username = $_POST['username'];
-        $password= $_POST['password'];
-        $username = mysqli_real_escape_string($connection, $username);
-        $password = mysqli_real_escape_string($connection, $password);
-        $query = "SELECT * FROM manager";
-        $select_user_query = mysqli_query($connection, $query);
-        confirm($select_user_query);
-        $row = mysqli_fetch_assoc($select_user_query);
-        $db_username = $row['username'];
-        $db_password = $row['password'];
+if(isset($_POST['login'])){
+    $username = $_POST['username'];
+    $password= $_POST['password'];
+    $username = mysqli_real_escape_string($connection, $username);
+    $password = mysqli_real_escape_string($connection, $password);
+    $query = "SELECT * FROM manager";
+    $select_user_query = mysqli_query($connection, $query);
+    confirm($select_user_query);
+    $row = mysqli_fetch_assoc($select_user_query);
+    $db_username = $row['username'];
+    $db_password = $row['password'];
 
-        if($username === $db_username && $password === $db_password){
-            echo $_SESSION['username'] = $db_username;
-            echo $_SESSION['password'] = $db_password;
-            header("Location: index.php");
-        }else{
-            header("Location: login.php");
-        }
+    if($username === $db_username && $password === $db_password){
+        $_SESSION['username'] = $db_username;
+        $_SESSION['password'] = $db_password;
+        header("Location: index.php");
+    }else{
+        header("Location: login.php");
     }
+}
+
+// include "includes/functions.php";
+// session_start();
+//     if(isset($_POST['login'])){
+//         $username = $_POST['username'];
+//         $password= $_POST['password'];
+//         $username = mysqli_real_escape_string($connection, $username);
+//         $password = mysqli_real_escape_string($connection, $password);
+//         $query = "SELECT * FROM manager";
+//         $select_user_query = mysqli_query($connection, $query);
+//         confirm($select_user_query);
+//         $row = mysqli_fetch_assoc($select_user_query);
+//         $db_username = $row['username'];
+//         $db_password = $row['password'];
+
+//         if($username === $db_username && $password === $db_password){
+//             echo $_SESSION['username'] = $db_username;
+//             echo $_SESSION['password'] = $db_password;
+//             header("Location: index.php");
+//         }else{
+//             header("Location: login.php");
+//         }
+//     }
 
 ?>
 
