@@ -8,7 +8,7 @@
 
   if(isset($_GET['add_book'])){
     $the_person_id = $_GET['add_book'];
-    $query = "SELECT * FROM users";
+    $query = "SELECT * FROM users WHERE person_id = $the_person_id";
     $select_users = mysqli_query($connection, $query);
 
     while($row = mysqli_fetch_assoc($select_users)){
@@ -31,7 +31,7 @@
     $book_title = $_POST['book_title'];
     $book_author = $_POST['book_author'];
     $book_status = $_POST['book_status'];
-    $user_email = $_POST['user_email'];
+    $user_email = $_GET['user_email'];
     $phone_number = $_POST['phone_number'];
 
     $query = "INSERT INTO users(person_id, user_name, user_email, book_title, book_status, book_author, phone_number )";
@@ -50,10 +50,6 @@
     <?php include "includes/navigation_form.php";?>
     <form action="" method="post" enctype="multipart/form-data">
 
-<div class="form-group">
-        <label for="title">Name</label>
-        <input type="text" class="form-control" name="user_name" value="<?php echo $user_name;?>">
-    </div>
 
     <div class="form-group">
         <label for="post_tags">Book Titles</label>
@@ -64,18 +60,15 @@
         <input type="text" class="form-control" name="book_author" value="">
     </div>
     <div class="form-group">
+        <label for="user_email">Email</label>
+        <input type="text" class="form-control" name="user_email" value="<?php echo $user_email;?>">
+    </div>
+    <div class="form-group">
         <select name="book_status" id="" value="<?php echo $book_status;?>">
             <option value="borrowed"><?php echo $book_status?></option>
         </select>
     </div>
-    <div class="form-group">
-        <label for="user_email">Email</label>
-        <input type="email" class="form-control" name="user_email" value="<?php echo $user_email;?>">
-    </div>
-    <div class="form-group">
-        <label for="user_email">Phone Number</label>
-        <input type="number" class="form-control" name="phone_number" value="<?php echo $phone_number;?>">
-    </div>
+
     <div class="form-group">
         <input class="btn btn-primary" value="Add Book" name="add_book" type="submit">
     </div>

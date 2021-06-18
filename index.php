@@ -50,7 +50,7 @@
               echo "<td><a href='index.php?return={$user_id}'>Returned</a></td>";
               echo "<td><a href='index.php?borrow={$user_id}'>Borrowed</a></td>";
               echo "<td><a href='index.php?source=delete&delete={$user_id}'>Delete</a></td>";
-              echo "<td><a href='add_book.php?source=add_book&add_book={$person_id}'>Add Book</a></td>";
+              echo "<td><a href='add_book.php?source=add_book&add_book={$person_id}&email=$user_email'>Add Book</a></td>";
               echo "</tr>";
 
             }
