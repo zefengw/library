@@ -1,37 +1,43 @@
 <?php
+    require_once "vendor/phpmailer/PHPMailer.php";
+    require_once "vendor/phpmailer/SMTP.php";
+    require_once "vendor/phpmailer/Exception.php";
     use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\SMTP;
     use PHPMailer\PHPMailer\Exception;
-    require 'PHPMailer-master/src/Exception.php';
-    require 'PHPMailer-master/src/PHPMailer.php';
-    require 'PHPMailer-master/src/SMTP.php';
+function sendEmail($name, $book, $author){
+    global $user_email;
 
-    if(isset($_POST['create_user']) || isset($_POST['add_book'])){
-        $username = $_POST['user_name'];
-        $user_email = $_POST['user_email'];
+    $mail = new PHPMailer();
+    $mail->isSMTP();
+    $mail->Host = "smtp.gmail.com";
+    $mail->SMTPAuth = "true";
+    $mail->SMTPSecure = "tls";
+    $mail->Port = "587";
+    $mail->Username = "ssccyouth20@gmail.com";
+    $mail->Password = "redbook7456";
+    $mail->Subject = "Receipt From SSCC Library";
+    $mail->setFrom("ssccyouth20@gmail.com");
+    $mail->isHTML(true);
+    // $mail->addAttachment("image path")
+    $mail->Body = "
+      <h2>Sheng Shen Catholic Church Library</h2>
+      <h4>
+        Hi $name!<br><br>
 
-        $mail = new PHPMailer();
-        $mail->IsSMTP();
+        You just borrowed the following book(s):<br>
+        <ul>
+        <li>Book: $book<br>By: $author</li><br>
+        </ul>
+        Please return this in 1 month, if possible, so that it could be circulated to other customers! <br><br>
+        Thank you! <br>
+        Sheng Shen Catholic Church Library
+        <br><br>
+      </h4>
 
-        // $mail->SMTPDebug  = 0;
-        $mail->SMTPAuth   = TRUE;
-        $mail->SMTPSecure = "tls";
-        $mail->Port       = 587;
-        $mail->Host       = "smtp.gmail.com";
-        $mail->Username   = "zefengwang613@gmail.com";
-        $mail->Password   = "R7BJGUEQ";
-
-        $mail->IsHTML(true);
-        $mail->AddAddress($user_email, $username);
-        $mail->SetFrom("zefengwang613@gmail.com", "Zefeng Wang");
-        $mail->Subject = "Test is Test Email sent via Gmail SMTP Server using PHP Mailer";
-        $content = "<b>This is a Test Email sent via Gmail SMTP Server using PHP mailer class.</b>";
-
-        $mail->MsgHTML($content);
-        if(!$mail->Send()) {
-          echo "Error while sending Email.";
-          var_dump($mail);
-        } else {
-          echo "Email sent successfully";
-        }
-    }
+    ";
+    $mail->addAddress($user_email);
+    $mail->Send();
+    $mail->smtpClose();
+  }
 ?>
