@@ -9,7 +9,7 @@
 
   if(isset($_GET['edit_user'])){
     $the_user_id = $_GET['edit_user'];
-    $query = "SELECT * FROM users";
+    $query = "SELECT * FROM users WHERE user_id = $the_user_id";
     $select_users = mysqli_query($connection, $query);
     while($row = mysqli_fetch_assoc($select_users)){
         $user_id =$row['user_id'];
@@ -70,14 +70,6 @@
     <div class="form-group">
         <select name="book_status" id="" value="<?php echo $book_status;?>">
             <option value="borrowed"><?php echo $book_status?></option>
-            <?php
-                if($book_status == "borrowed"){
-                    echo "<option value='returned'>returned</option>";
-                }else{
-                    echo "<option value='borrowed'>borrowed</option>";
-                }
-            ?>
-
         </select>
     </div>
     <div class="form-group">

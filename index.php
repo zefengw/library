@@ -43,27 +43,14 @@
               echo "<td>$user_name</td>";
               echo "<td>$book_title</td>";
               echo "<td>$book_author</td>";
-              echo "<td>$book_status</td>"; //when created, start a timer for 2 months. Once that timer passes 2 months show EXPIRED
+              echo "<td>$book_status</td>";
               echo "<td>$user_email</td>";
               echo "<td>$phone_number</td>";
               echo "<td><a href='edit_user.php?source=edit_user&edit_user={$user_id}'>Edit</a></td>";
-              echo "<td><a href='index.php?return={$user_id}'>Returned</a></td>";
-              echo "<td><a href='index.php?borrow={$user_id}'>Borrowed</a></td>";
               echo "<td><a href='index.php?source=delete&delete={$user_id}'>Delete</a></td>";
               echo "<td><a href='add_book.php?source=add_book&add_book={$person_id}&email=$user_email'>Add Book</a></td>";
               echo "</tr>";
 
-            }
-
-            if(isset($_GET['return'])){
-              $the_user_id = $_GET['return'];
-              $query = "UPDATE users SET book_status = 'returned' WHERE user_id = {$the_user_id} ";
-              $change_return_query = mysqli_query($connection, $query);
-            }
-            if(isset($_GET['borrow'])){
-              $the_user_id = $_GET['borrow'];
-              $query = "UPDATE users SET book_status = 'borrowed' WHERE user_id = {$the_user_id} ";
-              $change_borrow_query = mysqli_query($connection, $query);
             }
             if(isset($_GET['delete'])){
               $the_user_id = $_GET['delete'];

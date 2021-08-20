@@ -2,6 +2,7 @@
   include "includes/header.php";
   include "includes/sidebar.php";
   include "includes/functions.php";
+  include "email.php";
   block();
 ?>
 <?php
@@ -26,19 +27,19 @@
 
   if(isset($_POST['add_book'])){
 
-    $person_id= $_POST['person_id'];
-    $user_name = $_POST['user_name'];
+    $person_id= $_GET['add_book'];
+    $user_name = getUsernameFromPersonID($person_id)[0];
     $book_title = $_POST['book_title'];
     $book_author = $_POST['book_author'];
     $book_status = $_POST['book_status'];
-    $user_email = $_GET['user_email'];
-    $phone_number = $_POST['phone_number'];
+    $user_email = $_GET['email'];
 
     $query = "INSERT INTO users(person_id, user_name, user_email, book_title, book_status, book_author, phone_number )";
     $query .= "VALUES('{$the_person_id}', '{$user_name}', '{$user_email}', '{$book_title}', '{$book_status}', '{$book_author}', '{$phone_number}' ) ";
 
     $add_book_query = mysqli_query($connection, $query);
     confirm($add_book_query);
+    sendEmail($user_name, $book_title, $book_author);
     header("Location: index.php");
   }
 ?>

@@ -2,6 +2,7 @@
   include "includes/functions.php";
   include "includes/header.php";
   include "includes/sidebar.php";
+  include "email.php";
   block();
 
   if(isset($_POST['create_user'])){
@@ -24,6 +25,9 @@
     $query = "INSERT INTO users(person_id, user_name, user_email, book_title, book_status, book_author, phone_number )";
     $query .= "VALUES($person_id, '{$user_name}', '{$user_email}', '{$book_title}', '{$book_status}', '{$book_author}', '{$phone_number}' )";
     $create_user_query = mysqli_query($connection, $query);
+    confirm($create_user_query);
+    sendEmail($user_name, $book_title, $book_author);
+    header("Location: index.php");
   }
 ?>
 
@@ -40,7 +44,7 @@
     </div>
 <div class="form-group">
         <label for="title">Person ID</label>
-        <input type="number" class="form-control" name="person_id">
+        <input type="number" class="form-control" name="person_id" value="<?php echo findGreatestPersonID() + 1;?>">
     </div>
 
     <div class="form-group">

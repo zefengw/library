@@ -52,4 +52,21 @@ function block(){
 }
 }
 
+function getUsernameFromPersonID($id){
+    global $connection;
+    $query = "SELECT user_name FROM users WHERE person_id = '$id'";
+    $search_query = mysqli_query($connection, $query);
+    return mysqli_fetch_row($search_query);
+}
+
+function findGreatestPersonID(){
+    global $connection;
+    $query = "SELECT * FROM users";
+    $search_query = mysqli_query($connection, $query);
+    if(array_column(mysqli_fetch_all($search_query), 1)){
+        return max(array_column(mysqli_fetch_all($search_query), 1));
+    }
+    return 0;
+}
+
 ?>
